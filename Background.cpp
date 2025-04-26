@@ -22,13 +22,13 @@ int Background::draw(window& kimo, int windowWidth, int windowHeight) {
 int Background::getGreenRectWidth() const {
     return greenRectWidth;
 }
-Background:: draw_motion(window& w) {
+Background::draw_motion(window& w) {
     int y1 = 50;
     int y2 = 150;
     int y3 = 250;
+    bool z = 1;
     do {
-        draw_background(w, w.GetWidth(), w.GetHeight());
-        // conseder the circles as trees or buildings 
+        draw_background(w, w.GetWidth(), w.GetHeight(),x);
         w.SetBrush(RED);
         w.SetPen(BLACK);
         w.DrawCircle(50, y1, 20);
@@ -43,6 +43,10 @@ Background:: draw_motion(window& w) {
         w.DrawCircle(w.GetWidth() - 50, y3, 20);
         y1++, y2++, y3++;
         Pause(30);
+        if (z)greenRectWidth++;
+        if (!z)greenRectWidth--;
+        if (greenRectWidth > 300) z = 0;
+        if (greenRectWidth == 150)z = 1;
         if (y1 + 20 == w.GetHeight()){
             y1 = 50;
         }
