@@ -13,4 +13,5 @@ public:
     void set_images(int i, string y); 
     void set_status(int i, int x); 
     void DrawMenuDemo(window& w);
+    ~status();
 };
