@@ -55,3 +55,9 @@ status::DrawMenuDemo(window& w)
     w.DrawLine(0, w.GetHeight() - (Height + 30), w.GetWidth(), w.GetHeight() - (Height + 30));
 
 }
+status::~status(){
+    delete [] MenuItems;
+    delete [] s;
+    delete [] n;
+    delete [] colors;
+}
