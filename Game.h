@@ -1,30 +1,26 @@
 #pragma once
 #include "CMUgraphicsLib\CMUgraphics.h"
+#include "Background.h"
+#include "Plane.h"
 #include "Toolbar.h"
 
-class Game
-{
+class Game {
 private:
-	window* pWind;	//Pointer to the CMU graphics window
-	Toolbar* gameToolbar;
+    window& gameWindow;     // Reference to the main window
+    Background background;  // Background object
+    Plane* plane;           // Pointer to the plane object
+    Toolbar toolbar;        // Toolbar object
+    int windowWidth;        // Window width
+    int windowHeight;       // Window height
+    int moveStep;           // Movement size
+    bool isRunning;         // To control the game loop
 
 public:
-	Game();
-	~Game();
+    Game(window& w);
 
-	clicktype getMouseClick(int& x, int& y) const; //Get coordinate where user clicks and returns click type (left/right)
-	string getSrting() const;	 //Returns a string entered by the user
+    // Destructor - Clean up dynamically allocated resources
+    ~Game();
 
-
-	window* CreateWind(int, int, int, int) const; //creates the game window
-	void createToolbar();
-	void clearStatusBar() const;	//Clears the status bar
-
-
-	void printMessage(string msg) const;	//Print a message on Status bar
-
-	void go() const;
-
-	window* getWind() const;		//returns a pointer to the graphics window
+    // Run the game loop
+    void run();
 };
-
