@@ -13,4 +13,5 @@ public:
 
     // Getter for green rectangle width
     int getGreenRectWidth() const;
+    void draw_motion(window& w); //animation 
 };
