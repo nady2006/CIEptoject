@@ -1,14 +1,14 @@
 #pragma once
 #include "GameObject.h"
-class ship :
-    public GameObject
+#include "enemy.h"
+class ship :public enemy
 {
-private:
-    int ix;
-    int iy;
-    double s;
+    bool movingup = false;
 public:
-    ship(int x, int y, int size, Game* r_pGame, point ref, int r_width, int r_height, color fc, color bc);
-    void draw_ship(window& t);
+    ship(Game* r_pGame, point ref, double s, color fc, color bc);
+    void  draw() const override;
+    void move()override;
+    void collisionAction(GameObject* other) override;
+    void save(string f)override;
+    void load(string f)override;
 };
-

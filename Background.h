@@ -1,17 +1,22 @@
 #pragma once
 #include "CMUgraphicsLib\CMUgraphics.h"
-
-class Background {
+#include "Drawable.h"
+class Background :public Drawable
+{
 private:
-    int greenRectWidth;  // Width of the green rectangles on the sides
+    int y1;
+    int y2;
+    int y3;
+    bool z;
 
 public:
-    Background(int width = 150);
+    Background(Game* r_pGame, point ref, double opj_size, int w, int h);
 
     // Draw the background and return the green rectangle width
-    int draw(window& kimo, int windowWidth, int windowHeight);
+    void draw()const override;
 
     // Getter for green rectangle width
     int getGreenRectWidth() const;
-    void draw_motion(window& w); //animation 
+    void draw_motion(); //animation 
+    void draw_tree(int p_x,int p_y);
 };

@@ -1,14 +1,12 @@
 #pragma once
 #include "GameObject.h"
-class bridge :
-    public GameObject
+class bridge :public GameObject
 {
-private:
-    int ix;
-    int iy;
-    double s;
-public:
-    bridge(int x, int y, int size, Game* r_pGame, point ref, int r_width, int r_height, color fc, color bc);
-    void draw_bridge(window& t);
+    bridge(Game* r_pGame, point ref, double s, color fc, color bc);
+    void  draw() const override;
+    void move()override;
+    void collisionAction(GameObject* other) override;
+    void save(string f)override;
+    void load(string f)override;
 };
 

@@ -1,17 +1,14 @@
 #pragma once
-#include "PlaneMovement.h"
+#include "GameObject.h"
+
 class Bullet :
-    public PlaneMovement
+    public GameObject
 {
-    int x;
-    int y;
-    bool isActive;
-    int prevY;
 public:
-    Bullet();
-
-
-    void BulletLaunch(window& testWindow);
-    void BulletDraw(window& testWindow);
+    Bullet(Game* r_pGame, point ref, double s, color fc, color bc);
+    void  draw() const override;
+    void move()override;
+    void collisionAction(GameObject* other) override;
+    void save(string f)override;
+    void load(string f)override;
 };
-

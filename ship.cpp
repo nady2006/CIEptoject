@@ -1,66 +1,123 @@
 #include "ship.h"
+#include "Game.h"
 
-ship::ship(int x, int y, int size, Game* r_pGame, point ref, int r_width, int r_height, color fc, color bc) :GameObject(r_pGame, ref, r_width, r_height, fc, bc)
+ship::ship(Game* r_pGame, point ref, double s, color fc, color bc) :enemy(r_pGame, ref, s, fc, bc)
 {
-    ix = x;
-    iy = y;
-    s = size;
+	width = 290 * s;
+	hight = 105 * s;
+	stype = "ship";
 }
-void ship::draw_ship(window& t)
+
+void ship::draw()const
 {
-	t.SetPen(BLACK, 8);
-	t.DrawLine(s * (ix + 1280), s * (iy + 370), s * (ix + 1370), s * (iy + 360), FRAME);
-	t.DrawLine(s * (ix + 1530), s * (iy + 450), s * (ix + 1620), s * (iy + 435), FRAME);
-	t.SetPen(BLACK, 1);
-	t.SetBrush(SLATEGREY);
-	t.DrawTriangle(s * (ix + 515), s * (iy + 160), s * (ix + 545), s * (iy + 260), s * (ix + 485), s * (iy + 260), FILLED);
-	t.DrawTriangle(s * (ix + 850), s * (iy + 200), s * (ix + 880), s * (iy + 300), s * (ix + 825), s * (iy + 300), FILLED);
-	t.DrawTriangle(s * (ix + 690), s * (iy + 45), s * (ix + 705), s * (iy + 220), s * (ix + 675), s * (iy + 220), FILLED);
-	t.DrawRectangle(s * (ix + 1425), s * (iy + 470), s * (ix + 1525), s * (iy + 485));
-	t.DrawRectangle(s * (ix + 1180), s * (iy + 390), s * (ix + 1270), s * (iy + 405));
+	window* t = pGame->getWind();
+	const int ix = RefPoint.x;
+	const int iy = RefPoint.y;
 
-	t.SetBrush(GREY);
-	t.DrawRectangle(s * (ix + 470), s * (iy + 260), s * (ix + 560), s * (iy + 345));
-	t.DrawRectangle(s * (ix + 650), s * (iy + 210), s * (ix + 735), s * (iy + 345));
-	t.DrawRectangle(s * (ix + 810), s * (iy + 300), s * (ix + 895), s * (iy + 345));
-	t.DrawRectangle(s * (ix + 605), s * (iy + 65), s * (ix + 780), s * (iy + 120));
-	t.DrawRectangle(s * (ix + 1420), s * (iy + 440), s * (ix + 1530), s * (iy + 470));
-	t.DrawRectangle(s * (ix + 1175), s * (iy + 360), s * (ix + 1285), s * (iy + 390));
 
-	t.SetBrush(GREY);
-	int XPoints6[] = { s * (ix + 1145), s * (ix + 1325), s * (ix + 1355),s * (ix + 1355), s * (ix + 1115),s * (ix + 1115) };
-	int YPoints6[] = { s * (iy + 405), s * (iy + 405),s * (iy + 435), s * (iy + 490), s * (ix + 490),s * (ix + 435) };
-	t.DrawPolygon(XPoints6, YPoints6, 6, FILLED);
+	t->SetPen(BLACK, 8);
+	t->DrawLine(ix + s * 1280, iy + s * 370, ix + s * 1370, iy + s * 360, FRAME);
+	t->DrawLine(ix + s * 1530, iy + s * 450, ix + s * 1620, iy + s * 435, FRAME);
+	t->SetPen(BLACK, 1);
+	t->SetBrush(SLATEGREY);
+	t->DrawTriangle(ix + s * 515, iy + s * 160, ix + s * 545, iy + s * 260, ix + s * 485, iy + s * 260, FILLED);
+	t->DrawTriangle(ix + s * 850, iy + s * 200, ix + s * 880, iy + s * 300, ix + s * 825, iy + s * 300, FILLED);
+	t->DrawTriangle(ix + s * 690, iy + s * 45, ix + s * 705, iy + s * 220, ix + s * 675, iy + s * 220, FILLED);
+	t->DrawRectangle(ix + s * 1425, iy + s * 470, ix + s * 1525, iy + s * 485);
+	t->DrawRectangle(ix + s * 1180, iy + s * 390, ix + s * 1270, iy + s * 405);
 
-	t.SetBrush(SLATEGREY);
-	int XPoints5[] = { s * (ix + 465), s * (ix + 900), s * (ix + 925),s * (ix + 925), s * (ix + 445),s * (ix + 445) };
-	int YPoints5[] = { s * (iy + 345), s * (iy + 345), s * (iy + 360), s * (iy + 410), s * (ix + 410),s * (ix + 360) };
-	t.DrawPolygon(XPoints5, YPoints5, 6, FILLED);
+	t->SetBrush(GREY);
+	t->DrawRectangle(ix + s * 470, iy + s * 260, ix + s * 560, iy + s * 345);
+	t->DrawRectangle(ix + s * 650, iy + s * 210, ix + s * 735, iy + s * 345);
+	t->DrawRectangle(ix + s * 810, iy + s * 300, ix + s * 895, iy + s * 345);
+	t->DrawRectangle(ix + s * 605, iy + s * 65, ix + s * 780, iy + s * 120);
+	t->DrawRectangle(ix + s * 1420, iy + s * 440, ix + s * 1530, iy + s * 470);
+	t->DrawRectangle(ix + s * 1175, iy + s * 360, ix + s * 1285, iy + s * 390);
 
-	t.SetBrush(BLACK);
-	t.DrawRectangle(s * (ix + 1000), s * (iy + 180), s * (ix + 1025), s * (iy + 450));
-	t.DrawRectangle(s * (ix + 385), s * (iy + 410), s * (ix + 970), s * (iy + 455));
+	t->SetBrush(GREY);
+	int XPoints6[] = { ix + s * 1145, ix + s * 1325, ix + s * 1355, ix + s * 1355, ix + s * 1115, ix + s * 1115 };
+	int YPoints6[] = { iy + s * 405, iy + s * 405, iy + s * 435, iy + s * 490, iy + s * 490, iy + s * 435 };
+	t->DrawPolygon(XPoints6, YPoints6, 6, FILLED);
 
-	t.SetBrush(GREY);
-	int XPoints4[] = { s * (ix + 345), s * (ix + 1085), s * (ix + 1100),s * (ix + 285) };
-	int YPoints4[] = { s * (iy + 440), s * (iy + 440), s * (iy + 490), s * (iy + 495) };
-	t.DrawPolygon(XPoints4, YPoints4, 4, FILLED);
+	t->SetBrush(SLATEGREY);
+	int XPoints5[] = { ix + s * 465, ix + s * 900, ix + s * 925, ix + s * 925, ix + s * 445, ix + s * 445 };
+	int YPoints5[] = { iy + s * 345, iy + s * 345, iy + s * 360, iy + s * 410, iy + s * 410, iy + s * 360 };
+	t->DrawPolygon(XPoints5, YPoints5, 6, FILLED);
+	t->SetBrush(BLACK);
+	t->DrawRectangle(ix + s * 1000, iy + s * 180, ix + s * 1025, iy + s * 450);
+	t->DrawRectangle(ix + s * 385, iy + s * 410, ix + s * 970, iy + s * 455);
 
-	t.SetBrush(BLACK);
-	int XPoints1[] = { s * (ix + 20), s * (ix + 1890), s * (ix + 1860),s * (ix + 40) };
-	int YPoints1[] = { s * (iy + 490), s * (iy + 465), s * (iy + 510), s * (iy + 530) };
-	t.DrawPolygon(XPoints1, YPoints1, 4, FILLED);
+	t->SetBrush(GREY);
+	int XPoints4[] = { ix + s * 345, ix + s * 1085, ix + s * 1100, ix + s * 285 };
+	int YPoints4[] = { iy + s * 440, iy + s * 440, iy + s * 490, iy + s * 495 };
+	t->DrawPolygon(XPoints4, YPoints4, 4, FILLED);
 
-	t.SetBrush(GREY);
-	int XPoints2[] = { s * (ix + 40), s * (ix + 1860), s * (ix + 1825),s * (ix + 105) };
-	int YPoints2[] = { s * (iy + 530), s * (iy + 510), s * (iy + 595), s * (iy + 590) };
-	t.DrawPolygon(XPoints2, YPoints2, 4, FILLED);
+	t->SetBrush(BLACK);
+	int XPoints1[] = { ix + s * 20, ix + s * 1890, ix + s * 1860, ix + s * 40 };
+	int YPoints1[] = { iy + s * 490, iy + s * 465, iy + s * 510, iy + s * 530 };
+	t->DrawPolygon(XPoints1, YPoints1, 4, FILLED);
 
-	t.SetBrush(RED);
-	int XPoints3[] = { s * (ix + 105), s * (ix + 1825), s * (ix + 1825),s * (ix + 210) };
-	int YPoints3[] = { s * (iy + 590), s * (iy + 595), s * (iy + 640), s * (iy + 640) };
-	t.DrawPolygon(XPoints3, YPoints3, 4, FILLED);
+	t->SetBrush(GREY);
+	int XPoints2[] = { ix + s * 40, ix + s * 1860, ix + s * 1825, ix + s * 105 };
+	int YPoints2[] = { iy + s * 530, iy + s * 510, iy + s * 595, iy + s * 590 };
+	t->DrawPolygon(XPoints2, YPoints2, 4, FILLED);
 
-	t.SetBrush(BLACK);
-	t.DrawCircle(s * (ix + 1730), s * (iy + 550), s * 30, FILLED);
+	t->SetBrush(RED);
+	int XPoints3[] = { ix + s * 105, ix + s * 1825, ix + s * 1825, ix + s * 210 };
+	int YPoints3[] = { iy + s * 590, iy + s * 595, iy + s * 640, iy + s * 640 };
+	t->DrawPolygon(XPoints3, YPoints3, 4, FILLED);
+
+	t->SetBrush(BLACK);
+	t->DrawCircle(ix + s * 1730, iy + s * 550, s * 30, FILLED);
 }
+void ship::move()
+{
+	int speedValue = 20;
+
+	if (movingup) {
+		RefPoint.y += speedValue;
+		if (RefPoint.y >= 400) {
+			movingup = false;  
+		}
+	}
+	else {
+		RefPoint.y -= speedValue;
+		if (RefPoint.y <= 0) {
+			movingup = true;  
+		}
+	}
+}
+
+void ship::collisionAction(GameObject *other)
+{
+	if (other->get_type() == "Bullet") {
+		pGame->getstatusBar()->increment_status(3, 30);
+	}
+	else if (other->get_type() == "plane") {
+		pGame->getstatusBar()->decrement_status(0, 1);
+	}
+}
+
+
+void ship::save(string f)
+{
+	ofstream OutFile;
+	OutFile.open(f);
+	OutFile << "ship " << RefPoint.x << " " << RefPoint.y << " " << s << endl;
+	OutFile.close();
+}
+
+void ship::load(string f)
+{
+	ifstream Infile;
+	Infile.open(f);
+	bool label;
+	Infile >> label; // Read the first word ("bridge")
+
+	if (label = "plane")
+	{
+		Infile >> RefPoint.x >> RefPoint.y >> s;
+	}
+}
+
+

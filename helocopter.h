@@ -1,14 +1,16 @@
 #pragma once
 #include "GameObject.h"
-class helocopter :
-    public GameObject
+#include "enemy.h"
+class helocopter :public enemy
 {
 private:
-    int ix;
-    int iy;
-    double s;
+    bool movingRight = false;
 public:
-    helocopter(int x, int y, int size, Game* r_pGame, point ref, int r_width, int r_height, color fc, color bc);
-    void draw_helocopter(window& t);
+    helocopter(Game* r_pGame, point ref, double s, color fc, color bc);
+    void  draw() const override;
+    void move()override;
+    void collisionAction(GameObject* other) override;
+    void save(string f)override;
+    void load(string f)override;
 };
 

@@ -1,61 +1,71 @@
 #include "Background.h"
+#include "Game.h"
+#include "CMUgraphicsLib\auxil.h"	// where Pause is found
+#include "GameConfig.h"
 
-Background::Background(int width) : greenRectWidth(width) {}
+Background::Background(Game* r_pGame, point ref, double opj_size, int w,int h):Drawable(r_pGame, ref,opj_size,w,h)
+{
+     y1 = 50;
+     y2 = 150;
+     y3 = 250;
+     z = TRUE;
+}
 
-int Background::draw(window& kimo, int windowWidth, int windowHeight) {
+void Background::draw()const {
     // left green rectangle
-    kimo.SetPen(BLACK);
-    kimo.SetBrush(DARKGREEN);
-    kimo.DrawRectangle(0, 0, greenRectWidth, windowHeight);
+    window* t = pGame->getWind();
+    t->SetPen(BLACK);
+    t->SetBrush(DARKGREEN);
+    t->DrawRectangle(0, 0, config.greenRectangleWidth, hight);
 
     // right green rectangle
-    kimo.DrawRectangle(windowWidth - greenRectWidth, 0, windowWidth, windowHeight);
+    t->DrawRectangle(width - config.greenRectangleWidth, 0, width, hight);
 
     // center blue rectangle 
-    kimo.SetPen(BLACK);
-    kimo.SetBrush(BLUE);
-    kimo.DrawRectangle(greenRectWidth, 0, windowWidth - greenRectWidth, windowHeight);
+    t->SetPen(BLACK);
+    t->SetBrush(BLUE);
+    t->DrawRectangle(config.greenRectangleWidth, 0, width - config.greenRectangleWidth, hight);
 
-    return greenRectWidth; // Return width of the green rectangle
 }
 
 int Background::getGreenRectWidth() const {
-    return greenRectWidth;
+    return config.greenRectangleWidth;
 }
-Background::draw_motion(window& w) {
-    int y1 = 50;
-    int y2 = 150;
-    int y3 = 250;
-    bool z = 1;
-    do {
-        draw_background(w, w.GetWidth(), w.GetHeight(),x);
-        w.SetBrush(RED);
-        w.SetPen(BLACK);
-        w.DrawCircle(50, y1, 20);
-        w.DrawCircle(w.GetWidth()-50, y1, 20);
-        w.SetBrush(YELLOW);
-        w.SetPen(BLACK);
-        w.DrawCircle(50, y2, 20);
-        w.DrawCircle(w.GetWidth() - 50, y2, 20); w.SetBrush(YELLOW);
-        w.SetBrush(BLUE);
-        w.SetPen(BLACK);
-        w.DrawCircle(50, y3, 20);
-        w.DrawCircle(w.GetWidth() - 50, y3, 20);
-        y1++, y2++, y3++;
+void Background::draw_motion() {
+        draw();
+        window* t = pGame->getWind();
+        t->SetPen(BLACK);
+        draw_tree(40, y1);
+        draw_tree(t->GetWidth()-40, y1);
+        draw_tree(50, y2);
+        draw_tree(t->GetWidth() - 50, y2);
+        draw_tree(60, y3);
+        draw_tree(t->GetWidth() - 60, y3);
+        y1 = y1 + 5;
+        y2 = y2 + 5;
+        y3 = y3 + 5;
         Pause(30);
-        if (z)greenRectWidth++;
-        if (!z)greenRectWidth--;
-        if (greenRectWidth > 300) z = 0;
-        if (greenRectWidth == 150)z = 1;
-        if (y1 + 20 == w.GetHeight()){
+        if (z)config.greenRectangleWidth++;
+        if (!z)config.greenRectangleWidth--;
+        if (config.greenRectangleWidth > 200) z = FALSE;
+        if (config.greenRectangleWidth == 150)z = TRUE;
+        if (y1 + 20 == t->GetHeight()){
             y1 = 50;
         }
-        if (y2 + 20 == w.GetHeight()) {
-            y2 = 150;
+        if (y2 + 20 == t->GetHeight()) {
+            y2 = 50;
         }
-        if (y3 + 20 == w.GetHeight()) {
-            y3 = 250;
+        if (y3 + 20 == t->GetHeight()) {
+            y3 = 50;
         }
-    } while (true);
      
+}
+
+void Background::draw_tree(int p_x, int p_y)
+{
+    window* t = pGame->getWind();
+    t->SetBrush(GREEN);
+    t->DrawTriangle(p_x,p_y,p_x+40,p_y+60,p_x-40,p_y+60);
+    t->SetBrush(BROWN);
+    t->DrawRectangle(p_x+10, p_y + 60, p_x -10, p_y + 100);
 }

@@ -1,9 +1,15 @@
 #include "Drawable.h"
 
-Drawable::Drawable(Game* r_pGame, point r_point, int r_width, int r_height)
+Drawable::Drawable(Game* r_pGame, point r_point, double opject_size,int w=0,int h=0)
 {
 	pGame = r_pGame;
 	RefPoint = r_point;
-	width = r_width;
-	height = r_height;
+	s = opject_size;
+	hight = h;
+	width = w;
+}
+
+point Drawable::getRefPoint() const
+{
+	return RefPoint;
 }

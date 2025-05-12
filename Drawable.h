@@ -1,5 +1,6 @@
 #pragma once
 #include "CMUgraphicsLib\CMUgraphics.h"
+#include "GameConfig.h"
 
 class Game;     //forward declaration
 
@@ -13,11 +14,13 @@ class Drawable
 {
 protected:
 	point RefPoint;		//Each game object must have a reference point
-	int width, height;
+	double s;
+	int width, hight;
 	Game* pGame;        //pointer to game object
 
 public:
-	Drawable(Game* r_pGame, point r_point, int r_width, int r_height);
-	virtual void draw() const = 0;
+	Drawable(Game* r_pGame, point r_point, double opject_size,int w,int h);
+	virtual void draw() const =0;
+	point getRefPoint() const;
 };
 

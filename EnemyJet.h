@@ -1,14 +1,15 @@
 #pragma once
 #include "GameObject.h"
-class EnemyJet :
-    public GameObject
+#include "enemy.h"
+class EnemyJet :public enemy
 {
-private:
-    int ix;
-    int iy;
-    double s;
+    bool movingRight = false;
 public:
-    EnemyJet(int x, int y, int size, Game* r_pGame, point ref, int r_width, int r_height, color fc, color bc);
-    void draw_jet(window& t);
+    EnemyJet(Game* r_pGame, point ref, double s, color fc, color bc);
+    void  draw() const override;
+    void move()override;
+    void collisionAction(GameObject* other) override;
+    void save(string f)override;
+    void load(string f)override;
 };
 

@@ -133,7 +133,11 @@
     <ClCompile Include="ship.cpp" />
     <ClCompile Include="helocopter.cpp" />
     <ClCompile Include="bridge.cpp" />
-    <ClCompile Include="roud.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="status_bar.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="FuelDepot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -212,6 +216,10 @@
     <ClInclude Include="ship.h" />
     <ClInclude Include="helocopter.h" />
     <ClInclude Include="bridge.h" />
-    <ClInclude Include="roud.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="status_bar.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="FuelDepot.h" />
   </ItemGroup>
 </Project>
